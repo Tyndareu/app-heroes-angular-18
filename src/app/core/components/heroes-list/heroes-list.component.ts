@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Hero } from '../../interfaces/hero.interface';
 import { HeroesService } from '../../services/heroes.service';
 
@@ -13,20 +13,21 @@ export class HeroesListComponent implements OnInit {
 
   /**
    * List of heroes to be displayed.
-   *
-   * @type {Hero[]}
-   * @memberof HeroesListComponent
    */
-  public heroes: Hero[] = [];
+  public heroes = signal<Hero[]>([]);
+
 
   constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {
-    // Load heroes from service
-    this.heroesService.getHeroes().subscribe({
-      next: (data) => (this.heroes = data),
-      error: (err) => console.error('Error loading heroes: ', err),
-    });
+    this._loadHeroes();
+  }
+
+  /** 
+   * Loads heroes from the service 
+   */
+  private _loadHeroes(): void {
+    this.heroesService.getHeroes().subscribe(data => this.heroes.set(data));
   }
 
 }
