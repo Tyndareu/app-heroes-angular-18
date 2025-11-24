@@ -11,17 +11,22 @@ import { HeroesService } from '../../services/heroes.service';
 })
 export class HeroesListComponent implements OnInit {
 
-  heroes: Hero[] = [];
+  /**
+   * List of heroes to be displayed.
+   *
+   * @type {Hero[]}
+   * @memberof HeroesListComponent
+   */
+  public heroes: Hero[] = [];
 
   constructor(private heroesService: HeroesService) { }
 
   ngOnInit(): void {
+    // Load heroes from service
     this.heroesService.getHeroes().subscribe({
       next: (data) => (this.heroes = data),
       error: (err) => console.error('Error loading heroes: ', err),
     });
-    
   }
-
 
 }
