@@ -9,7 +9,7 @@ import { Hero } from '../interfaces/hero.interface';
 })
 export class HeroesService {
 
-  private readonly baseUrl = `${CORE_CONFIG.apiUrl}/heroes`;
+  private readonly baseUrl = `${CORE_CONFIG.apiUrl}`;
   private readonly resource = 'heroes';
 
   constructor(private http: HttpClient) { }
