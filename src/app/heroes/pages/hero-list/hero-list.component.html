@@ -1,0 +1,25 @@
+<div class="hero-list">
+  <!-- Renderiza la lista de héroes si existen -->
+  @if (allHeroes(); as heroes) {
+    <div class="hero-list__container">
+      <h1 class="hero-list__title">Lista de Héroes</h1>
+
+      <div class="hero-list__flex">
+        <!-- Itera sobre cada héroe y muestra su información -->
+        @for (hero of heroes; track hero.id) {
+          <div class="hero-list__card">
+            <h2 class="hero-list__card-name">{{ hero.superhero }}</h2>
+            <p class="hero-list__card-publisher">{{ hero.publisher }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  } @else {
+    <!-- Muestra mensaje de error si no hay héroes -->
+    <div class="hero-list__error">
+      <p class="hero-list__error-message">
+        Lo sentimos, no se pudieron cargar los héroes.
+      </p>
+    </div>
+  }
+</div>
