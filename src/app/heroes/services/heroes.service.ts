@@ -4,7 +4,7 @@
  */
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { Hero } from '../interfaces/hero.interface';
 
@@ -23,9 +23,15 @@ export class HeroesService {
   private readonly _apiUrl: string = environment.apiUrl;
   /**
    * Obtiene la lista completa de héroes desde la API.
+   * Si ocurre un error, retorna un array vacío y registra el error en consola.
    * @returns Observable con el array de héroes
    */
   public getHeroes(): Observable<Hero[]> {
-    return this._http.get<Hero[]>(`${this._apiUrl}/heroes`);
+    return this._http.get<Hero[]>(`${this._apiUrl}/heroes`).pipe(
+      catchError(error => {
+        console.error('Error al obtener los héroes:', error);
+        return of([]);
+      })
+    );
   }
 }
