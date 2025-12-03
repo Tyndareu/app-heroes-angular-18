@@ -23,10 +23,19 @@ export class HeroesService {
    */
   private readonly _apiUrl: string = environment.apiUrl;
 
+  /**
+   * Obtiene la lista completa de héroes desde la API.
+   * @returns Observable con el array de héroes
+   */
   public getHeroes(): Observable<Hero[]> {
     return this._http.get<Hero[]>(this._apiUrl);
   }
 
+  /**
+   * Obtiene los datos de un héroe específico por su ID.
+   * @param id - ID del héroe a buscar
+   * @returns Observable con el héroe encontrado
+   */
   public getHeroById(id: string): Observable<Hero> {
     return this._http.get<Hero>(`${this._apiUrl}/${id}`);
   }

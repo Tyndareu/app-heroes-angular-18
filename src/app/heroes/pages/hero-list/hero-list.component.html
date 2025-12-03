@@ -8,7 +8,11 @@
         <!-- Itera sobre cada héroe y muestra su información -->
         @for (hero of heroes; track hero.id) {
           <div class="hero-list__card">
-            <h2 class="hero-list__card-name">{{ hero.superhero }}</h2>
+            <a
+              [routerLink]="['/heroes/detail', hero.id]"
+              class="hero-list__card-link">
+              <h2 class="hero-list__card-name">{{ hero.superhero }}</h2>
+            </a>
             <p class="hero-list__card-publisher">{{ hero.publisher }}</p>
           </div>
         } @empty {
