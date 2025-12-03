@@ -14,6 +14,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'heroes/detail/:id',
+    loadComponent: () =>
+      import('./heroes/pages/hero-detail/hero-detail.component').then(
+        c => c.HeroDetailComponent
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'heroes/list',
   },
